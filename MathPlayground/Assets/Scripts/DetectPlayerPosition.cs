@@ -11,7 +11,14 @@ public class DetectPlayerPosition : MonoBehaviour
     void Update()
     {
         var distanceToPlayer = playerPosition.position - transform.position;
-        var distanceToPlayerNormalized = distanceToPlayer.normalized;
+        var distanceLength = Mathf.Sqrt(distanceToPlayer.x * distanceToPlayer.x
+            + distanceToPlayer.y * distanceToPlayer.y
+            + distanceToPlayer.z * distanceToPlayer.z);
+
+        var distanceToPlayerNormalized = new Vector3(distanceToPlayer.x / distanceLength,
+            distanceToPlayer.y / distanceLength,
+            distanceToPlayer.z / distanceLength);
+
         _dotResult = (distanceToPlayerNormalized.x * transform.right.x
             + distanceToPlayerNormalized.y * transform.right.y
             + distanceToPlayerNormalized.z * transform.right.z);
